@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<!-- =============================================================================
+ FILE: UI_MOCKUP.html
+ PATH: docs/UI_MOCKUP.html
+ VERSION: 0.1.0
+ SPRINT: 0 (Pre-development / Planning)
+ LAST_UPDATED: 2026-06-09
+ PURPOSE: Interaktywny mockup UI/UX ContextCompass. Zastępuje Figmę — aktualizowany na koniec każdego sprintu na podstawie commitów. Otwórz w przeglądarce.
+ UWAGA: Aktualizuj po każdym sprincie! Sekcja "Sprint changelog" na dole dokumentu.
+ SPRINT_UPDATE_RULE: Na koniec sprintu — przejrzyj commity (`git log --oneline sprint-start..HEAD`), zaktualizuj zmienione ekrany, dodaj wpis do changelogu.
+ ============================================================================= -->
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ContextCompass — UI/UX Mockup v0.1.0</title>
+  <style>
+    :root {
+      --primary: #6366F1;
+      --primary-dark: #4F46E5;
+      --secondary: #EC4899;
+      --accent: #10B981;
+      --danger: #EF4444;
+      --warning: #F59E0B;
+      --bg: #F9FAFB;
+      --bg-card: #FFFFFF;
+      --bg-sidebar: #1E1B4B;
+      --text: #111827;
+      --text-muted: #6B7280;
+      --text-light: #9CA3AF;
+      --border: #E5E7EB;
+      --radius: 12px;
+      --radius-sm: 8px;
+      --shadow: 0 1px 3px rgba(0,0,0,.1), 0 1px 2px rgba(0,0,0,.06);
+      --shadow-md: 0 4px 6px rgba(0,0,0,.07), 0 2px 4px rgba(0,0,0,.06);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', system-ui, sans-serif; background: #E5E7EB; color: var(--text); }
+
+    /* ── NAV ── */
+    .nav { background: white; border-bottom: 1px solid var(--border); padding: 12px 24px; display: flex; align-items: center; gap: 16px; position: sticky; top: 0; z-index: 100; }
+    .nav-logo { font-weight: 700; font-size: 18px; color: var(--primary); }
+    .nav-version { font-size: 11px; background: var(--primary); color: white; padding: 2px 8px; border-radius: 20px; }
+    .nav-sprint { font-size: 12px; color: var(--text-muted); margin-left: auto; }
+    .nav-tabs { display: flex; gap: 4px; }
+    .nav-tab { padding: 6px 14px; border-radius: 6px; cursor: pointer; font-size: 13px; border: 1px solid transparent; transition: all .15s; color: var(--text-muted); }
+    .nav-tab:hover { background: #F3F4F6; color: var(--text); }
+    .nav-tab.active { background: var(--primary); color: white; border-color: var(--primary); }
+
+    /* ── SCREENS CONTAINER ── */
+    .screens { padding: 24px; display: flex; flex-direction: column; gap: 32px; }
+    .screen-section { display: none; flex-direction: column; gap: 24px; }
+    .screen-section.active { display: flex; }
+    .screen-group { display: flex; gap: 20px; flex-wrap: wrap; align-items: flex-start; }
+    .screen-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; color: var(--text-muted); margin-bottom: 8px; }
+    .screen-title { font-size: 20px; font-weight: 700; color: var(--text); border-left: 3px solid var(--primary); padding-left: 12px; }
+    .screen-desc { font-size: 13px; color: var(--text-muted); max-width: 600px; }
+    .badge-new { font-size: 10px; background: var(--accent); color: white; padding: 1px 6px; border-radius: 10px; vertical-align: middle; }
+    .badge-todo { font-size: 10px; background: var(--warning); color: white; padding: 1px 6px; border-radius: 10px; vertical-align: middle; }
+
+    /* ── PHONE FRAME ── */
+    .phone { width: 375px; flex-shrink: 0; background: var(--bg-card); border-radius: 28px; box-shadow: 0 20px 60px rgba(0,0,0,.15), 0 0 0 8px #1F2937; overflow: hidden; }
+    .phone-bar { background: #1F2937; height: 28px; display: flex; align-items: center; justify-content: center; }
+    .phone-notch { width: 80px; height: 10px; background: #111; border-radius: 10px; }
+    .phone-screen { overflow-y: auto; max-height: 720px; }
+
+    /* ── DESKTOP FRAME ── */
+    .desktop { width: 860px; flex-shrink: 0; background: var(--bg-card); border-radius: 16px; box-shadow: 0 20px 60px rgba(0,0,0,.15); overflow: hidden; }
+    .desktop-bar { background: #1F2937; height: 28px; display: flex; align-items: center; padding: 0 12px; gap: 6px; }
+    .desktop-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .d-red { background: #EF4444; } .d-yellow { background: #F59E0B; } .d-green { background: #10B981; }
+
+    /* ── PLUGIN FRAME ── */
+    .plugin-frame { width: 340px; flex-shrink: 0; background: white; border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,.2); overflow: hidden; }
+    .plugin-bar { background: var(--primary); padding: 10px 14px; display: flex; align-items: center; gap: 8px; color: white; font-size: 13px; font-weight: 600; }
+
+    /* ── ANNOTATION ── */
+    .annotation { background: #FFF9C4; border: 1px solid #F59E0B; border-radius: 8px; padding: 10px 14px; font-size: 12px; color: #92400E; max-width: 300px; }
+    .annotation strong { display: block; margin-bottom: 4px; }
+
+    /* ── UI COMPONENTS ── */
+    .app-layout { display: flex; height: 720px; }
+    .sidebar { width: 72px; background: var(--bg-sidebar); display: flex; flex-direction: column; align-items: center; padding: 16px 0; gap: 8px; }
+    .sidebar-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: rgba(255,255,255,.5); font-size: 20px; transition: all .15s; }
+    .sidebar-icon:hover, .sidebar-icon.active { background: rgba(255,255,255,.1); color: white; }
+    .sidebar-icon.active { background: var(--primary); color: white; }
+    .sidebar-icon .badge { position: absolute; top: -2px; right: -2px; background: var(--danger); color: white; font-size: 9px; width: 16px; height: 16px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+    .sidebar-icon { position: relative; }
+    .main-content { flex: 1; overflow: hidden; display: flex; flex-direction: column; }
+    .top-bar { padding: 14px 20px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 12px; background: white; }
+    .top-bar-title { font-weight: 700; font-size: 16px; }
+    .top-bar-sub { font-size: 12px; color: var(--text-muted); }
+    .top-bar-actions { margin-left: auto; display: flex; gap: 8px; }
+
+    /* Sort controls */
+    .sort-bar { padding: 10px 16px; background: #F9FAFB; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 8px; font-size: 12px; }
+    .sort-label { color: var(--text-muted); }
+    .sort-chip { padding: 4px 10px; border-radius: 20px; border: 1px solid var(--border); cursor: pointer; background: white; color: var(--text-muted); transition: all .15s; }
+    .sort-chip.active { background: var(--primary); color: white; border-color: var(--primary); }
+    .search-bar { flex: 1; border: 1px solid var(--border); border-radius: 20px; padding: 4px 12px; font-size: 12px; background: white; }
+
+    /* Contact list */
+    .contact-list { flex: 1; overflow-y: auto; padding: 12px; display: flex; flex-direction: column; gap: 8px; }
+    .contact-card { background: white; border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 12px 14px; display: flex; gap: 12px; align-items: center; cursor: pointer; transition: all .15s; box-shadow: var(--shadow); }
+    .contact-card:hover { border-color: var(--primary); box-shadow: 0 0 0 2px rgba(99,102,241,.1); }
+    .contact-avatar { width: 40px; height: 40px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 16px; flex-shrink: 0; }
+    .contact-info { flex: 1; min-width: 0; }
+    .contact-name { font-weight: 600; font-size: 14px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .contact-meta { font-size: 11px; color: var(--text-muted); display: flex; gap: 8px; align-items: center; }
+    .contact-badge { padding: 2px 7px; border-radius: 10px; font-size: 10px; font-weight: 600; }
+    .badge-work { background: #E0F2FE; color: #0369A1; }
+    .badge-romantic { background: #FCE7F3; color: #BE185D; }
+    .badge-friend { background: #D1FAE5; color: #065F46; }
+    .badge-general { background: #F3F4F6; color: #374151; }
+    .contact-reminder { font-size: 10px; color: var(--warning); display: flex; align-items: center; gap: 3px; }
+    .contact-unread { width: 8px; height: 8px; border-radius: 50%; background: var(--primary); flex-shrink: 0; }
+
+    /* Buttons */
+    .btn { padding: 8px 16px; border-radius: 8px; font-size: 13px; font-weight: 600; cursor: pointer; border: none; transition: all .15s; }
+    .btn-primary { background: var(--primary); color: white; }
+    .btn-primary:hover { background: var(--primary-dark); }
+    .btn-danger { background: var(--danger); color: white; }
+    .btn-outline { background: transparent; border: 1px solid var(--border); color: var(--text); }
+    .btn-sm { padding: 5px 10px; font-size: 12px; }
+    .btn-icon { width: 32px; height: 32px; border-radius: 8px; display: flex; align-items: center; justify-content: center; background: transparent; border: 1px solid var(--border); cursor: pointer; color: var(--text-muted); font-size: 14px; }
+    .btn-icon:hover { background: #F3F4F6; }
+
+    /* Input with clear */
+    .input-wrap { position: relative; }
+    .input-field { width: 100%; border: 1px solid var(--border); border-radius: 8px; padding: 8px 32px 8px 12px; font-size: 13px; outline: none; }
+    .input-field:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(99,102,241,.1); }
+    .input-clear { position: absolute; right: 8px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; color: var(--text-muted); font-size: 14px; padding: 2px; border-radius: 4px; }
+    .input-clear:hover { color: var(--text); background: #F3F4F6; }
+    .input-help { font-size: 11px; color: var(--text-muted); margin-top: 4px; }
+
+    /* Chat view */
+    .chat-area { flex: 1; overflow-y: auto; padding: 16px; display: flex; flex-direction: column; gap: 10px; background: #F9FAFB; }
+    .msg { max-width: 70%; padding: 10px 14px; border-radius: 14px; font-size: 13px; line-height: 1.5; }
+    .msg-user { background: var(--primary); color: white; align-self: flex-end; border-bottom-right-radius: 4px; }
+    .msg-other { background: white; color: var(--text); border: 1px solid var(--border); align-self: flex-start; border-bottom-left-radius: 4px; }
+    .msg-time { font-size: 10px; color: var(--text-muted); margin-top: 4px; }
+    .msg-ai-note { font-size: 10px; color: var(--warning); margin-top: 4px; display: flex; align-items: center; gap: 3px; }
+    .chat-input-area { padding: 12px; border-top: 1px solid var(--border); background: white; }
+    .chat-input-row { display: flex; gap: 8px; align-items: flex-end; }
+    .chat-textarea { flex: 1; border: 1px solid var(--border); border-radius: 10px; padding: 8px 12px; font-size: 13px; resize: none; min-height: 40px; max-height: 120px; outline: none; font-family: inherit; }
+    .chat-textarea:focus { border-color: var(--primary); }
+    .chat-actions { padding: 6px 0 0; display: flex; gap: 6px; }
+
+    /* Hint panel */
+    .hint-panel { width: 280px; border-left: 1px solid var(--border); display: flex; flex-direction: column; background: white; }
+    .hint-panel-header { padding: 12px 14px; border-bottom: 1px solid var(--border); font-weight: 600; font-size: 13px; display: flex; align-items: center; gap: 6px; }
+    .hint-card { margin: 10px; border: 1px solid var(--border); border-radius: 10px; padding: 12px; cursor: pointer; transition: all .15s; }
+    .hint-card:hover { border-color: var(--primary); background: #F5F3FF; }
+    .hint-tone { font-size: 10px; text-transform: uppercase; font-weight: 700; color: var(--text-muted); letter-spacing: .05em; margin-bottom: 6px; }
+    .hint-text { font-size: 12px; line-height: 1.5; color: var(--text); }
+    .hint-why { font-size: 11px; color: var(--text-muted); margin-top: 6px; padding-top: 6px; border-top: 1px solid var(--border); }
+    .hint-copy { font-size: 11px; color: var(--primary); cursor: pointer; margin-top: 4px; }
+    .hint-limit { margin: 10px; padding: 10px; background: #FFF9C4; border-radius: 8px; font-size: 11px; color: #92400E; text-align: center; }
+
+    /* Modal */
+    .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,.5); display: flex; align-items: center; justify-content: center; z-index: 200; }
+    .modal { background: white; border-radius: 16px; padding: 24px; width: 400px; box-shadow: 0 25px 50px rgba(0,0,0,.2); }
+    .modal-title { font-size: 18px; font-weight: 700; margin-bottom: 8px; }
+    .modal-desc { font-size: 13px; color: var(--text-muted); margin-bottom: 20px; line-height: 1.6; }
+    .modal-actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 20px; }
+    .modal-confirm-input { margin: 12px 0; }
+
+    /* Toast */
+    .toast-container { position: fixed; top: 16px; right: 16px; display: flex; flex-direction: column; gap: 8px; z-index: 300; }
+    .toast { padding: 12px 16px; border-radius: 10px; font-size: 13px; font-weight: 500; box-shadow: var(--shadow-md); display: flex; align-items: center; gap: 8px; min-width: 280px; }
+    .toast-success { background: #D1FAE5; color: #065F46; border: 1px solid #6EE7B7; }
+    .toast-error { background: #FEE2E2; color: #991B1B; border: 1px solid #FCA5A5; }
+    .toast-warning { background: #FEF3C7; color: #92400E; border: 1px solid #FCD34D; }
+    .toast-info { background: #EEF2FF; color: #3730A3; border: 1px solid #A5B4FC; }
+    .toast-close { margin-left: auto; cursor: pointer; opacity: .6; }
+
+    /* Network banner */
+    .network-banner { background: var(--warning); color: white; text-align: center; padding: 6px; font-size: 12px; font-weight: 600; }
+
+    /* Settings */
+    .settings-layout { display: flex; height: 720px; }
+    .settings-nav { width: 200px; border-right: 1px solid var(--border); padding: 16px 0; }
+    .settings-nav-item { padding: 10px 20px; font-size: 13px; cursor: pointer; color: var(--text-muted); display: flex; align-items: center; gap: 8px; }
+    .settings-nav-item:hover { background: #F3F4F6; color: var(--text); }
+    .settings-nav-item.active { background: #EEF2FF; color: var(--primary); font-weight: 600; }
+    .settings-content { flex: 1; overflow-y: auto; padding: 24px; }
+    .settings-section { margin-bottom: 28px; }
+    .settings-title { font-size: 14px; font-weight: 700; margin-bottom: 14px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+    .settings-row { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid #F3F4F6; }
+    .settings-row-label { font-size: 13px; }
+    .settings-row-desc { font-size: 11px; color: var(--text-muted); }
+    .toggle { width: 44px; height: 24px; background: #D1D5DB; border-radius: 12px; position: relative; cursor: pointer; transition: .2s; }
+    .toggle.on { background: var(--primary); }
+    .toggle::after { content: ''; width: 18px; height: 18px; background: white; border-radius: 50%; position: absolute; top: 3px; left: 3px; transition: .2s; box-shadow: 0 1px 3px rgba(0,0,0,.2); }
+    .toggle.on::after { left: 23px; }
+
+    /* Log viewer */
+    .log-item { padding: 8px 12px; border-radius: 6px; font-size: 11px; font-family: monospace; margin-bottom: 4px; display: flex; gap: 8px; }
+    .log-error-item { background: #FEE2E2; color: #991B1B; }
+    .log-warn-item { background: #FEF3C7; color: #92400E; }
+    .log-info-item { background: #EEF2FF; color: #3730A3; }
+    .log-time { opacity: .6; flex-shrink: 0; }
+
+    /* Reminder */
+    .reminder-item { display: flex; align-items: center; gap: 10px; padding: 10px; background: #FFFBEB; border: 1px solid #FCD34D; border-radius: 8px; margin-bottom: 6px; }
+    .reminder-date { font-size: 11px; font-weight: 700; color: var(--warning); min-width: 80px; }
+    .reminder-text { font-size: 12px; flex: 1; }
+    .reminder-done { font-size: 18px; cursor: pointer; }
+
+    /* Onboarding */
+    .onboarding { padding: 32px 24px; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 20px; }
+    .onboarding-step { width: 48px; height: 48px; border-radius: 50%; background: var(--primary); color: white; font-weight: 700; font-size: 18px; display: flex; align-items: center; justify-content: center; }
+    .onboarding-dots { display: flex; gap: 6px; }
+    .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border); }
+    .dot.active { background: var(--primary); }
+
+    /* Colors for avatars */
+    .av-purple { background: #EDE9FE; color: #7C3AED; }
+    .av-pink { background: #FCE7F3; color: #BE185D; }
+    .av-blue { background: #DBEAFE; color: #1D4ED8; }
+    .av-green { background: #D1FAE5; color: #065F46; }
+    .av-orange { background: #FEF3C7; color: #B45309; }
+
+    /* Misc */
+    .divider { height: 1px; background: var(--border); margin: 12px 0; }
+    .chip { display: inline-flex; align-items: center; gap: 4px; padding: 3px 10px; border-radius: 20px; font-size: 11px; border: 1px solid var(--border); color: var(--text-muted); }
+    .premium-badge { background: linear-gradient(135deg, #F59E0B, #EF4444); color: white; font-size: 10px; padding: 2px 7px; border-radius: 10px; font-weight: 700; }
+    .offline-pill { background: var(--warning); color: white; font-size: 10px; padding: 2px 8px; border-radius: 10px; }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="nav">
+  <span class="nav-logo">⊙ ContextCompass</span>
+  <span class="nav-version">v0.1.0</span>
+  <div class="nav-tabs">
+    <div class="nav-tab active" onclick="showSection('dashboard')">Dashboard</div>
+    <div class="nav-tab" onclick="showSection('chat')">Czat + AI</div>
+    <div class="nav-tab" onclick="showSection('plugin')">Plugin</div>
+    <div class="nav-tab" onclick="showSection('modals')">Modale</div>
+    <div class="nav-tab" onclick="showSection('onboarding')">Onboarding</div>
+    <div class="nav-tab" onclick="showSection('settings')">Ustawienia</div>
+    <div class="nav-tab" onclick="showSection('mobile')">Mobile</div>
+  </div>
+  <span class="nav-sprint">Sprint 0 · 2026-06-09</span>
+</nav>
+
+<div class="screens">
+
+  <!-- ══════════════════════════════════════════════
+       DASHBOARD
+  ══════════════════════════════════════════════ -->
+  <div id="section-dashboard" class="screen-section active">
+    <div class="screen-title">Dashboard — Lista kontaktów</div>
+    <p class="screen-desc">Główny widok aplikacji. Sortowanie, filtrowanie, wyszukiwanie, przypomnienia jako badge na kartach.</p>
+
+    <div class="screen-group">
+      <!-- DESKTOP DASHBOARD -->
+      <div>
+        <div class="screen-label">Desktop / PWA</div>
+        <div class="desktop">
+          <div class="desktop-bar">
+            <div class="desktop-dot d-red"></div>
+            <div class="desktop-dot d-yellow"></div>
+            <div class="desktop-dot d-green"></div>
+            <span style="color:#9CA3AF;font-size:11px;margin-left:8px">ContextCompass — Twoje rozmowy</span>
+          </div>
+          <!-- Network banner (only when offline) -->
+          <!-- <div class="network-banner">📡 Brak połączenia — pracujesz offline</div> -->
+          <div class="app-layout">
+            <!-- SIDEBAR -->
+            <div class="sidebar">
+              <div style="font-size:22px;font-weight:900;color:white;margin-bottom:8px">⊙</div>
+              <div class="sidebar-icon active" title="Kontakty">💬</div>
+              <div class="sidebar-icon" title="Profil">👤</div>
+              <div class="sidebar-icon" title="Przypomnienia">
+                🔔
+                <span class="badge">2</span>
+              </div>
+              <div class="sidebar-icon" title="Analiza">📊</div>
+              <div style="flex:1"></div>
+              <div class="sidebar-icon" title="Ustawienia">⚙️</div>
+            </div>
+            <!-- MAIN -->
+            <div class="main-content">
+              <div class="top-bar">
+                <div>
+                  <div class="top-bar-title">Twoje rozmowy</div>
+                  <div class="top-bar-sub">5 kontaktów · 2 aktywne dziś</div>
+                </div>
+                <div class="top-bar-actions">
+                  <button class="btn btn-primary btn-sm">+ Dodaj osobę</button>
+                </div>
+              </div>
+              <!-- SORT BAR -->
+              <div class="sort-bar">
+                <span class="sort-label">Sortuj:</span>
+                <span class="sort-chip active">A–Z</span>
+                <span class="sort-chip">Aktywność</span>
+                <span class="sort-chip">Typ relacji</span>
+                <span class="sort-chip">Nieodczytane</span>
+                <input class="search-bar" placeholder="🔍 Szukaj osoby lub tagu..." />
+              </div>
+              <!-- CONTACTS -->
+              <div class="contact-list">
+                <div class="contact-card">
+                  <div class="contact-avatar av-pink">A</div>
+                  <div class="contact-info">
+                    <div class="contact-name">Ania K.</div>
+                    <div class="contact-meta">
+                      <span class="contact-badge badge-romantic">Romantyczna</span>
+                      <span>Aktywna 2h temu</span>
+                    </div>
+                    <div class="contact-reminder">🔔 Dziś 19:00 — zadzwonić po rozmowie</div>
+                  </div>
+                  <div class="contact-unread"></div>
+                </div>
+
+                <div class="contact-card">
+                  <div class="contact-avatar av-blue">M</div>
+                  <div class="contact-info">
+                    <div class="contact-name">Marek — szef</div>
+                    <div class="contact-meta">
+                      <span class="contact-badge badge-work">Zawodowa</span>
+                      <span>Wczoraj</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="contact-card">
+                  <div class="contact-avatar av-green">K</div>
+                  <div class="contact-info">
+                    <div class="contact-name">Kasia z siłowni</div>
+                    <div class="contact-meta">
+                      <span class="contact-badge badge-friend">Znajoma</span>
+                      <span>3 dni temu</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="contact-card" style="opacity:.6">
+                  <div class="contact-avatar av-orange">P</div>
+                  <div class="contact-info">
+                    <div class="contact-name">Piotr — klient XYZ <span style="font-size:10px;color:#9CA3AF">(zarchiwizowany)</span></div>
+                    <div class="contact-meta">
+                      <span class="contact-badge badge-work">Zawodowa</span>
+                      <span>2 tygodnie temu</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ANNOTATIONS -->
+      <div style="display:flex;flex-direction:column;gap:12px;max-width:280px">
+        <div class="annotation">
+          <strong>📌 Sortowanie</strong>
+          4 opcje: A–Z (default), Ostatnia aktywność, Typ relacji, Nieodczytane na górze. Preferencja zapisywana w profiles.settings.
+        </div>
+        <div class="annotation">
+          <strong>📌 Przypomnienie-badge</strong>
+          Ikona 🔔 + czas pod imieniem gdy jest aktywne przypomnienie. Kliknięcie karty → widok rozmowy z widocznym przypomnieniem.
+        </div>
+        <div class="annotation">
+          <strong>📌 Nieodczytane-dot</strong>
+          Mały niebieski krop po prawej gdy są nowe podpowiedzi AI od ostatniej wizyty.
+        </div>
+        <div class="annotation">
+          <strong>📌 Archiwizacja</strong>
+          Zarchiwizowane widoczne na dole (opacity 60%) lub ukryte przełącznikiem "Pokaż zarchiwizowane".
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       CZAT + AI
+  ══════════════════════════════════════════════ -->
+  <div id="section-chat" class="screen-section">
+    <div class="screen-title">Widok rozmowy z osobą + Panel podpowiedzi AI</div>
+    <p class="screen-desc">Główna funkcja aplikacji. Lewy panel: historia + input. Prawy panel: podpowiedzi AI (otwierany przyciskiem lub prawym klikiem w pluginie).</p>
+
+    <div class="screen-group">
+      <div>
+        <div class="screen-label">Desktop — czat z panelem AI</div>
+        <div class="desktop">
+          <div class="desktop-bar">
+            <div class="desktop-dot d-red"></div><div class="desktop-dot d-yellow"></div><div class="desktop-dot d-green"></div>
+          </div>
+          <div class="app-layout">
+            <div class="sidebar">
+              <div style="font-size:22px;font-weight:900;color:white;margin-bottom:8px">⊙</div>
+              <div class="sidebar-icon active">💬</div>
+              <div class="sidebar-icon">👤</div>
+              <div class="sidebar-icon">🔔</div>
+              <div class="sidebar-icon">📊</div>
+              <div style="flex:1"></div>
+              <div class="sidebar-icon">⚙️</div>
+            </div>
+            <div class="main-content">
+              <div class="top-bar">
+                <div class="contact-avatar av-pink" style="width:32px;height:32px;font-size:13px">A</div>
+                <div>
+                  <div class="top-bar-title">Ania K.</div>
+                  <div class="top-bar-sub">Romantyczna · Ostatnia aktywność 2h temu</div>
+                </div>
+                <div class="top-bar-actions">
+                  <button class="btn btn-outline btn-sm">📊 Analizuj</button>
+                  <button class="btn btn-outline btn-sm">🔔 Przypomnienie</button>
+                  <button class="btn-icon" title="Więcej opcji">⋯</button>
+                </div>
+              </div>
+              <div style="display:flex;flex:1;overflow:hidden">
+                <!-- CHAT -->
+                <div style="flex:1;display:flex;flex-direction:column;overflow:hidden">
+                  <div class="chat-area">
+                    <div class="msg msg-other">
+                      Hej, jak minął Ci weekend? 😊
+                      <div class="msg-time">sob, 14:23</div>
+                    </div>
+                    <div class="msg msg-user">
+                      Całkiem fajnie, byłem w górach! A u Ciebie?
+                      <div class="msg-time">sob, 14:31</div>
+                    </div>
+                    <div class="msg msg-other">
+                      Och, zazdroszczę! Ja siedziałam w domu z książką, ale to też było miłe. Jakie góry?
+                      <div class="msg-ai-note">⚠️ AI: dobra okazja na pogłębienie rozmowy</div>
+                      <div class="msg-time">sob, 14:35</div>
+                    </div>
+                  </div>
+                  <div class="chat-input-area">
+                    <div class="chat-input-row">
+                      <textarea class="chat-textarea" rows="1" placeholder="Wpisz lub wklej fragment rozmowy..."></textarea>
+                      <button class="btn-icon" title="Nagraj głosowo">🎙️</button>
+                    </div>
+                    <div class="chat-actions">
+                      <button class="btn btn-primary btn-sm">✨ Podpowiedź AI</button>
+                      <button class="btn btn-outline btn-sm">Wyślij jako Ja</button>
+                      <button class="btn btn-outline btn-sm">Wyślij jako Ania</button>
+                    </div>
+                  </div>
+                </div>
+                <!-- HINT PANEL -->
+                <div class="hint-panel">
+                  <div class="hint-panel-header">✨ Podpowiedzi AI <span class="premium-badge">Gemini</span></div>
+                  <div class="hint-card">
+                    <div class="hint-tone">💬 Swobodna</div>
+                    <div class="hint-text">Tatry! Byłem na Rysach, widoki były niesamowite. A Ty jakie książki czytasz ostatnio?</div>
+                    <div class="hint-why">💡 Odpowiadasz na pytanie + pytasz wzajemnie — buduje więź</div>
+                    <div class="hint-copy">📋 Kopiuj</div>
+                  </div>
+                  <div class="hint-card">
+                    <div class="hint-tone">😄 Żartobliwa</div>
+                    <div class="hint-text">Tatry — tam gdzie jest prawie tyle samo owiec co turystów 😄 Ale widoki rekompensują wszystko!</div>
+                    <div class="hint-why">💡 Lekki humor pasuje do tonu rozmowy</div>
+                    <div class="hint-copy">📋 Kopiuj</div>
+                  </div>
+                  <div class="hint-limit">Zostało 18/30 podpowiedzi dziś · <a href="#" style="color:var(--primary)">Kup Premium</a></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:12px;max-width:280px">
+        <div class="annotation">
+          <strong>📌 Głosowe wpisywanie</strong>
+          Mikrofon → Web Speech API → tekst w textarea w czasie rzeczywistym. Stop po 3s ciszy.
+        </div>
+        <div class="annotation">
+          <strong>📌 AI-note na wiadomości</strong>
+          Opcjonalna uwaga AI (⚠️) przy wiadomościach rozmówcy wskazująca okazje lub zagrożenia w rozmowie.
+        </div>
+        <div class="annotation">
+          <strong>📌 Limit dzienny</strong>
+          Widoczny w panelu podpowiedzi. Po wyczerpaniu → modal Premium (nie blokuje UI).
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       PLUGIN
+  ══════════════════════════════════════════════ -->
+  <div id="section-plugin" class="screen-section">
+    <div class="screen-title">Plugin Chrome/Edge — Overlay + Popup</div>
+    <p class="screen-desc">Overlay pojawia się po prawym kliknięciu na zaznaczonym tekście. Popup otwiera się przez ikonę w toolbarze.</p>
+
+    <div class="screen-group">
+      <div>
+        <div class="screen-label">Overlay — podpowiedź w kontekście strony</div>
+        <div class="plugin-frame" style="width:360px">
+          <div class="plugin-bar">
+            <span>⊙</span> ContextCompass — podpowiedź
+            <button style="margin-left:auto;background:rgba(255,255,255,.2);border:none;color:white;border-radius:4px;padding:2px 8px;cursor:pointer;font-size:11px">✕</button>
+          </div>
+          <div style="padding:14px">
+            <div style="font-size:11px;color:var(--text-muted);margin-bottom:10px;background:#F3F4F6;padding:8px;border-radius:6px">
+              <strong>Zaznaczony tekst:</strong> "Och, zazdroszczę! Jakie góry?"
+            </div>
+            <div style="font-size:11px;color:var(--text-muted);margin-bottom:10px">Kontekst: <strong>Ania K.</strong> · Romantyczna</div>
+            <div class="hint-card" style="margin:0 0 8px">
+              <div class="hint-tone">💬 Swobodna</div>
+              <div class="hint-text">Tatry! Byłem na Rysach — widoki były epickie 🏔️</div>
+              <div class="hint-copy">📋 Kopiuj do schowka</div>
+            </div>
+            <div class="hint-card" style="margin:0 0 8px">
+              <div class="hint-tone">😄 Żartobliwa</div>
+              <div class="hint-text">Tatry, gdzie owce > turyści 😄 Ale widoki rekompensują!</div>
+              <div class="hint-copy">📋 Kopiuj do schowka</div>
+            </div>
+            <div style="text-align:center;margin-top:8px">
+              <a href="#" style="font-size:11px;color:var(--primary)">Otwórz pełną analizę →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="screen-label">Popup — mini dashboard</div>
+        <div class="plugin-frame">
+          <div class="plugin-bar">⊙ ContextCompass <span style="margin-left:auto;font-size:10px;opacity:.7">Gemini · 18/30</span></div>
+          <div style="padding:12px;display:flex;flex-direction:column;gap:8px">
+            <div class="contact-card" style="padding:8px 10px">
+              <div class="contact-avatar av-pink" style="width:30px;height:30px;font-size:12px">A</div>
+              <div class="contact-info"><div class="contact-name" style="font-size:12px">Ania K.</div><div class="contact-meta">Romantyczna</div></div>
+              <button class="btn btn-primary btn-sm">Otwórz</button>
+            </div>
+            <div class="contact-card" style="padding:8px 10px">
+              <div class="contact-avatar av-blue" style="width:30px;height:30px;font-size:12px">M</div>
+              <div class="contact-info"><div class="contact-name" style="font-size:12px">Marek — szef</div><div class="contact-meta">Zawodowa</div></div>
+              <button class="btn btn-outline btn-sm">Otwórz</button>
+            </div>
+            <div class="divider"></div>
+            <button class="btn btn-primary" style="width:100%;font-size:12px">+ Dodaj osobę</button>
+            <a href="#" style="text-align:center;font-size:11px;color:var(--text-muted)">Otwórz pełną aplikację</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       MODALE
+  ══════════════════════════════════════════════ -->
+  <div id="section-modals" class="screen-section">
+    <div class="screen-title">Modale — wzorce UI</div>
+    <p class="screen-desc">Wszystkie destruktywne akcje, potwierdzenia i formy używają modali. ZERO window.alert / window.confirm.</p>
+
+    <div class="screen-group" style="align-items:flex-start">
+
+      <!-- CONFIRM DELETE -->
+      <div>
+        <div class="screen-label">Potwierdzenie usunięcia kontaktu</div>
+        <div class="modal" style="position:relative;box-shadow:var(--shadow-md)">
+          <div class="modal-title">🗑️ Usuń kontakt</div>
+          <div class="modal-desc">Czy na pewno chcesz usunąć <strong>Ania K.</strong>? Usunięte zostaną też wszystkie rozmowy i analizy.<br><br>Tej akcji nie można cofnąć.</div>
+          <div class="modal-actions">
+            <button class="btn btn-outline">Anuluj</button>
+            <button class="btn btn-danger">Tak, usuń</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- CONFIRM DELETE ACCOUNT -->
+      <div>
+        <div class="screen-label">Usunięcie konta — wymaga wpisania</div>
+        <div class="modal" style="position:relative;box-shadow:var(--shadow-md)">
+          <div class="modal-title">⚠️ Usuń konto</div>
+          <div class="modal-desc">Wszystkie dane zostaną trwale usunięte. Wpisz <strong>USUŃ</strong> aby potwierdzić.</div>
+          <div class="modal-confirm-input">
+            <div class="input-wrap">
+              <input class="input-field" placeholder="Wpisz: USUŃ" />
+            </div>
+          </div>
+          <div class="modal-actions">
+            <button class="btn btn-outline">Anuluj</button>
+            <button class="btn btn-danger" disabled style="opacity:.4">Rozumiem — usuń konto</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ADD REMINDER -->
+      <div>
+        <div class="screen-label">Dodaj przypomnienie</div>
+        <div class="modal" style="position:relative;box-shadow:var(--shadow-md)">
+          <div class="modal-title">🔔 Dodaj przypomnienie</div>
+          <div class="modal-desc">Przypomnienie pojawi się w powiadomieniu w wybranym czasie.</div>
+          <div style="display:flex;flex-direction:column;gap:12px;margin-bottom:4px">
+            <div>
+              <div class="screen-label" style="margin-bottom:4px">Data i godzina</div>
+              <div class="input-wrap">
+                <input class="input-field" type="datetime-local" />
+              </div>
+            </div>
+            <div>
+              <div class="screen-label" style="margin-bottom:4px">Treść przypomnienia</div>
+              <div class="input-wrap">
+                <input class="input-field" placeholder="np. Zadzwonić po spotkaniu..." value="Zadzwonić po spotkaniu" />
+                <button class="input-clear">✕</button>
+              </div>
+              <div class="input-help">Maksymalnie 200 znaków</div>
+            </div>
+          </div>
+          <div class="modal-actions">
+            <button class="btn btn-outline">Anuluj</button>
+            <button class="btn btn-primary">Zapisz przypomnienie</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- TOAST EXAMPLES -->
+      <div>
+        <div class="screen-label">System toastów</div>
+        <div style="display:flex;flex-direction:column;gap:8px;width:320px">
+          <div class="toast toast-success">✅ Kontakt zapisany pomyślnie <span class="toast-close">✕</span></div>
+          <div class="toast toast-error">❌ Nie udało się pobrać podpowiedzi. Spróbuj ponownie. <span class="toast-close">✕</span></div>
+          <div class="toast toast-warning">⚠️ Przełączono na Groq (limit Gemini wyczerpany) <span class="toast-close">✕</span></div>
+          <div class="toast toast-info">ℹ️ Połączenie przywrócone <span class="toast-close">✕</span></div>
+          <div class="network-banner" style="border-radius:8px">📡 Brak połączenia — pracujesz offline</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       ONBOARDING
+  ══════════════════════════════════════════════ -->
+  <div id="section-onboarding" class="screen-section">
+    <div class="screen-title">Onboarding — 3 kroki</div>
+    <p class="screen-desc">Wyświetlany przy pierwszym uruchomieniu. Można pominąć (Pomiń). Dane uzupełnialne później w Profilu.</p>
+
+    <div class="screen-group">
+      <div>
+        <div class="screen-label">Krok 1 — Powitalny</div>
+        <div class="phone"><div class="phone-bar"><div class="phone-notch"></div></div>
+          <div class="phone-screen">
+            <div class="onboarding">
+              <div style="font-size:64px">⊙</div>
+              <div style="font-size:22px;font-weight:800;color:var(--primary)">ContextCompass</div>
+              <div style="font-size:14px;color:var(--text-muted);line-height:1.7">Prowadź rozmowy z głową.<br>AI pamięta kontekst, Ty budujesz relacje.</div>
+              <button class="btn btn-primary" style="width:100%;padding:14px">Zacznijmy →</button>
+              <div class="onboarding-dots"><div class="dot active"></div><div class="dot"></div><div class="dot"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="screen-label">Krok 2 — Profil</div>
+        <div class="phone"><div class="phone-bar"><div class="phone-notch"></div></div>
+          <div class="phone-screen">
+            <div class="onboarding" style="text-align:left;align-items:stretch">
+              <div style="text-align:center"><div class="onboarding-step">2</div></div>
+              <div style="font-size:18px;font-weight:700">Opowiedz o sobie</div>
+              <div style="font-size:13px;color:var(--text-muted)">AI będzie lepiej rozumiał Twój styl komunikacji</div>
+              <div style="display:flex;flex-direction:column;gap:12px">
+                <div>
+                  <div class="screen-label" style="margin-bottom:4px">Imię lub pseudonim *</div>
+                  <div class="input-wrap"><input class="input-field" value="Kamil" /><button class="input-clear">✕</button></div>
+                </div>
+                <div>
+                  <div class="screen-label" style="margin-bottom:4px">Wiek</div>
+                  <div class="input-wrap"><input class="input-field" placeholder="np. 26" /></div>
+                  <div class="input-help">Używane do lepszych podpowiedzi</div>
+                </div>
+              </div>
+              <button class="btn btn-primary" style="width:100%;padding:14px">Dalej →</button>
+              <a href="#" style="text-align:center;font-size:12px;color:var(--text-muted)">Pomiń — uzupełnię później</a>
+              <div class="onboarding-dots" style="justify-content:center"><div class="dot"></div><div class="dot active"></div><div class="dot"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="screen-label">Krok 3 — Pierwsza osoba</div>
+        <div class="phone"><div class="phone-bar"><div class="phone-notch"></div></div>
+          <div class="phone-screen">
+            <div class="onboarding" style="text-align:left;align-items:stretch">
+              <div style="text-align:center"><div class="onboarding-step">3</div></div>
+              <div style="font-size:18px;font-weight:700">Dodaj pierwszą osobę</div>
+              <div style="display:flex;flex-direction:column;gap:12px">
+                <div>
+                  <div class="screen-label" style="margin-bottom:4px">Imię / pseudonim *</div>
+                  <div class="input-wrap"><input class="input-field" placeholder="np. Ania, Szef z pracy" /></div>
+                </div>
+                <div>
+                  <div class="screen-label" style="margin-bottom:4px">Typ relacji *</div>
+                  <select class="input-field">
+                    <option>Ogólna rozmowa</option>
+                    <option selected>Romantyczna</option>
+                    <option>Zawodowa</option>
+                    <option>Znajomy / Koleżanka</option>
+                  </select>
+                </div>
+                <div>
+                  <div class="screen-label" style="margin-bottom:4px">Co wiesz o tej osobie?</div>
+                  <div class="input-wrap" style="position:relative">
+                    <textarea class="chat-textarea input-field" style="height:80px" placeholder="np. Poznaliśmy się tydzień temu..."></textarea>
+                    <button class="input-clear" style="top:12px">✕</button>
+                  </div>
+                  <div class="input-help">Im więcej napiszesz, tym lepsze podpowiedzi</div>
+                </div>
+              </div>
+              <button class="btn btn-primary" style="width:100%;padding:14px">Gotowe! ✓</button>
+              <div class="onboarding-dots" style="justify-content:center"><div class="dot"></div><div class="dot"></div><div class="dot active"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       USTAWIENIA
+  ══════════════════════════════════════════════ -->
+  <div id="section-settings" class="screen-section">
+    <div class="screen-title">Ustawienia — Settings + Logi aplikacji</div>
+    <p class="screen-desc">Panel ustawień z zakładką Logów — widoczne błędy, ostrzeżenia, informacje z działania aplikacji.</p>
+
+    <div class="screen-group">
+      <div>
+        <div class="screen-label">Desktop — Ustawienia</div>
+        <div class="desktop">
+          <div class="desktop-bar"><div class="desktop-dot d-red"></div><div class="desktop-dot d-yellow"></div><div class="desktop-dot d-green"></div></div>
+          <div class="settings-layout">
+            <div class="settings-nav">
+              <div style="padding:12px 20px;font-size:11px;font-weight:700;color:var(--text-muted);text-transform:uppercase">Ustawienia</div>
+              <div class="settings-nav-item active">🤖 Asystent AI</div>
+              <div class="settings-nav-item">👤 Konto</div>
+              <div class="settings-nav-item">🔒 Bezpieczeństwo</div>
+              <div class="settings-nav-item">🔔 Powiadomienia</div>
+              <div class="settings-nav-item">💾 Kopia zapasowa</div>
+              <div class="settings-nav-item">🎨 Wygląd</div>
+              <div class="settings-nav-item">
+                ⭐ Subskrypcja
+              </div>
+              <div class="settings-nav-item">
+                📋 Logi
+                <span style="margin-left:auto;background:var(--danger);color:white;font-size:9px;padding:1px 5px;border-radius:10px">2</span>
+              </div>
+              <div class="settings-nav-item">ℹ️ O aplikacji</div>
+            </div>
+            <div class="settings-content">
+              <div class="settings-section">
+                <div class="settings-title">Asystent AI</div>
+                <div class="settings-row">
+                  <div><div class="settings-row-label">Aktualny model</div><div class="settings-row-desc">Gemini 1.5 Flash (darmowy) · 18/30 podpowiedzi dziś</div></div>
+                  <span class="chip">Zmień</span>
+                </div>
+                <div class="settings-row">
+                  <div><div class="settings-row-label">Własny klucz OpenAI</div><div class="settings-row-desc">Nieograniczone zapytania z własnym kluczem</div></div>
+                  <span class="chip">Dodaj klucz</span>
+                </div>
+                <div class="settings-row">
+                  <div><div class="settings-row-label">Automatyczny fallback</div><div class="settings-row-desc">Przełącz na Groq gdy Gemini wyczerpany</div></div>
+                  <div class="toggle on"></div>
+                </div>
+              </div>
+              <div class="settings-section">
+                <div class="settings-title">Logi aplikacji <span class="badge-todo">2 błędy</span></div>
+                <div style="margin-bottom:8px;display:flex;gap:6px">
+                  <span class="sort-chip active" style="font-size:11px">Wszystkie</span>
+                  <span class="sort-chip" style="font-size:11px">Błędy</span>
+                  <span class="sort-chip" style="font-size:11px">Ostrzeżenia</span>
+                  <span class="sort-chip" style="font-size:11px">Info</span>
+                </div>
+                <div class="log-item log-error-item"><span class="log-time">14:23</span><span>[ERROR] ai-proxy: Gemini 429 — fallback do Groq (extension)</span></div>
+                <div class="log-item log-error-item"><span class="log-time">13:10</span><span>[ERROR] syncEngine: Supabase TIMEOUT po 15s (web)</span></div>
+                <div class="log-item log-warn-item"><span class="log-time">12:45</span><span>[WARN] syncEngine: conflict resolved — lastWriteWins (web)</span></div>
+                <div class="log-item log-info-item"><span class="log-time">11:00</span><span>[INFO] auth: login success — device trusted (web)</span></div>
+                <div style="margin-top:10px;display:flex;gap:8px">
+                  <button class="btn btn-outline btn-sm">Wyczyść logi</button>
+                  <button class="btn btn-primary btn-sm">Wyślij raport błędów</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:12px;max-width:240px">
+        <div class="annotation">
+          <strong>📌 Badge na ikonie Logi</strong>
+          Liczba nowych błędów (ERROR) od ostatniej wizyty — widoczna na ikonie menu Logi.
+        </div>
+        <div class="annotation">
+          <strong>📌 Wyślij raport</strong>
+          Wysyła ostatnie 10 logów (anonimowo, bez treści rozmów) przez Edge Function log-error na webhook autora.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════
+       MOBILE
+  ══════════════════════════════════════════════ -->
+  <div id="section-mobile" class="screen-section">
+    <div class="screen-title">Mobile — PWA (iOS / Android)</div>
+    <p class="screen-desc">Widoki mobilne. Biometria na ekranie logowania, bottom navigation, swipe actions.</p>
+
+    <div class="screen-group">
+      <div>
+        <div class="screen-label">Logowanie — biometria</div>
+        <div class="phone"><div class="phone-bar"><div class="phone-notch"></div></div>
+          <div class="phone-screen">
+            <div class="onboarding">
+              <div style="font-size:52px">⊙</div>
+              <div style="font-size:20px;font-weight:800">Witaj z powrotem</div>
+              <div style="width:100%;display:flex;flex-direction:column;gap:10px">
+                <div class="input-wrap"><input class="input-field" placeholder="Email" /></div>
+                <div class="input-wrap"><input class="input-field" type="password" placeholder="Hasło" /><button class="input-clear">✕</button></div>
+                <button class="btn btn-primary" style="padding:12px">Zaloguj się</button>
+                <div style="display:flex;align-items:center;gap:8px"><div style="flex:1;height:1px;background:var(--border)"></div><span style="font-size:11px;color:var(--text-muted)">lub</span><div style="flex:1;height:1px;background:var(--border)"></div></div>
+                <button class="btn btn-outline" style="padding:12px;font-size:15px">👆 Zaloguj odciskiem palca</button>
+                <button class="btn btn-outline" style="padding:12px;font-size:15px">🆔 Zaloguj Face ID</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="screen-label">Dashboard mobilny</div>
+        <div class="phone"><div class="phone-bar"><div class="phone-notch"></div></div>
+          <div class="phone-screen" style="display:flex;flex-direction:column;height:720px">
+            <div class="network-banner" style="display:none">📡 Brak połączenia</div>
+            <div class="top-bar">
+              <div class="top-bar-title">Rozmowy</div>
+              <div class="top-bar-actions">
+                <button class="btn-icon">🔍</button>
+                <button class="btn btn-primary btn-sm">+</button>
+              </div>
+            </div>
+            <div class="sort-bar" style="overflow-x:auto;flex-wrap:nowrap">
+              <span class="sort-chip active">A–Z</span>
+              <span class="sort-chip">Aktywność</span>
+              <span class="sort-chip">Typ</span>
+              <span class="sort-chip">🔵 Nowe</span>
+            </div>
+            <div class="contact-list" style="flex:1">
+              <div class="contact-card">
+                <div class="contact-avatar av-pink">A</div>
+                <div class="contact-info">
+                  <div class="contact-name">Ania K.</div>
+                  <div class="contact-meta"><span class="contact-badge badge-romantic">Romantyczna</span></div>
+                  <div class="contact-reminder">🔔 Dziś 19:00</div>
+                </div>
+                <div class="contact-unread"></div>
+              </div>
+              <div class="contact-card">
+                <div class="contact-avatar av-blue">M</div>
+                <div class="contact-info">
+                  <div class="contact-name">Marek — szef</div>
+                  <div class="contact-meta"><span class="contact-badge badge-work">Zawodowa</span></div>
+                </div>
+              </div>
+            </div>
+            <!-- BOTTOM NAV -->
+            <div style="display:flex;border-top:1px solid var(--border);background:white;padding:8px 0">
+              <div style="flex:1;text-align:center;font-size:20px;color:var(--primary)">💬</div>
+              <div style="flex:1;text-align:center;font-size:20px;color:var(--text-muted)">👤</div>
+              <div style="flex:1;text-align:center;font-size:20px;color:var(--text-muted)">🔔</div>
+              <div style="flex:1;text-align:center;font-size:20px;color:var(--text-muted)">⚙️</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:12px;max-width:260px">
+        <div class="annotation">
+          <strong>📌 Biometria</strong>
+          Przyciski Face ID / odcisk palca widoczne tylko gdy urządzenie obsługuje daną metodę. Wykrycie automatyczne.
+        </div>
+        <div class="annotation">
+          <strong>📌 Bottom nav mobile</strong>
+          4 ikony: Rozmowy, Profil, Przypomnienia (z badge), Ustawienia. Odpowiednik sidebar na desktop.
+        </div>
+        <div class="annotation">
+          <strong>📌 Sortowanie przewijalne</strong>
+          Na mobile sort chips w horizontal scroll (overflow-x: auto), żeby nie zawijać.
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /screens -->
+
+<!-- Sprint changelog -->
+<div style="background:white;border-top:2px solid var(--primary);padding:24px;margin-top:8px">
+  <div style="max-width:800px;margin:0 auto">
+    <div style="font-size:16px;font-weight:700;margin-bottom:12px;color:var(--primary)">📅 Sprint Changelog</div>
+    <div style="font-size:12px;color:var(--text-muted);margin-bottom:16px">
+      ⚠️ <strong>Zasada:</strong> Po każdym sprincie — przejrzyj commity <code>git log --oneline [sprint-start]..[HEAD]</code> i zaktualizuj zmienione ekrany. Dodaj wpis poniżej.
+    </div>
+    <table style="width:100%;border-collapse:collapse;font-size:12px">
+      <thead>
+        <tr style="background:#F3F4F6">
+          <th style="padding:8px;text-align:left;border:1px solid var(--border)">Sprint</th>
+          <th style="padding:8px;text-align:left;border:1px solid var(--border)">Data</th>
+          <th style="padding:8px;text-align:left;border:1px solid var(--border)">Zaktualizowane ekrany</th>
+          <th style="padding:8px;text-align:left;border:1px solid var(--border)">Nowe features w UI</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="padding:8px;border:1px solid var(--border)">Sprint 0</td>
+          <td style="padding:8px;border:1px solid var(--border)">2026-06-09</td>
+          <td style="padding:8px;border:1px solid var(--border)">Wszystkie (inicjalizacja)</td>
+          <td style="padding:8px;border:1px solid var(--border)">Dashboard, Czat+AI, Plugin, Modale, Onboarding, Settings, Mobile</td>
+        </tr>
+        <tr style="background:#F9FAFB">
+          <td style="padding:8px;border:1px solid var(--border)">Sprint 1</td>
+          <td style="padding:8px;border:1px solid var(--border);color:var(--text-muted)">— do uzupełnienia —</td>
+          <td style="padding:8px;border:1px solid var(--border);color:var(--text-muted)">—</td>
+          <td style="padding:8px;border:1px solid var(--border);color:var(--text-muted)">—</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+  function showSection(id) {
+    document.querySelectorAll('.screen-section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('section-' + id).classList.add('active');
+    event.target.classList.add('active');
+  }
+</script>
+</body>
+</html>
