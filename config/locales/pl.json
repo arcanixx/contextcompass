@@ -1,0 +1,493 @@
+{
+  "_comment": "ContextCompass — tłumaczenia PL. Klucze: moduł.element.właściwość",
+
+  "app": {
+    "name": "ContextCompass",
+    "tagline": "Prowadź rozmowy z głową"
+  },
+
+  "common": {
+    "save": "Zapisz",
+    "cancel": "Anuluj",
+    "delete": "Usuń",
+    "confirm": "Potwierdź",
+    "close": "Zamknij",
+    "edit": "Edytuj",
+    "add": "Dodaj",
+    "back": "Wróć",
+    "next": "Dalej",
+    "skip": "Pomiń",
+    "loading": "Ładowanie...",
+    "saving": "Zapisywanie...",
+    "deleting": "Usuwanie...",
+    "error_generic": "Coś poszło nie tak. Spróbuj ponownie.",
+    "error_network": "Problem z połączeniem. Sprawdź internet.",
+    "offline_banner": "Brak połączenia — pracujesz offline",
+    "online_restored": "Połączenie przywrócone",
+    "clear_field": "Wyczyść pole",
+    "copy": "Kopiuj",
+    "copied": "Skopiowano!",
+    "required_field": "To pole jest wymagane",
+    "optional": "opcjonalne",
+    "yes": "Tak",
+    "no": "Nie",
+    "or": "lub"
+  },
+
+  "auth": {
+    "login": {
+      "title": "Zaloguj się",
+      "subtitle": "Miło Cię znowu widzieć",
+      "email": "Adres e-mail",
+      "email_placeholder": "twoj@email.pl",
+      "password": "Hasło",
+      "password_placeholder": "Twoje hasło",
+      "submit": "Zaloguj się",
+      "forgot_password": "Zapomniałem hasła",
+      "no_account": "Nie masz konta?",
+      "register_link": "Zarejestruj się",
+      "google": "Kontynuuj z Google",
+      "apple": "Kontynuuj z Apple"
+    },
+    "register": {
+      "title": "Utwórz konto",
+      "subtitle": "Zacznij zarządzać rozmowami lepiej",
+      "email": "Adres e-mail",
+      "password": "Hasło",
+      "password_hint": "Min. 8 znaków, wielka litera i cyfra",
+      "confirm_password": "Powtórz hasło",
+      "confirm_password_mismatch": "Hasła się nie zgadzają",
+      "submit": "Utwórz konto",
+      "has_account": "Masz już konto?",
+      "login_link": "Zaloguj się",
+      "agree_prefix": "Akceptuję ",
+      "privacy_policy": "Politykę Prywatności",
+      "and": " i ",
+      "terms": "Regulamin",
+      "agree_required": "Akceptacja jest wymagana"
+    },
+    "biometric": {
+      "prompt": "Zaloguj się odciskiem palca lub Face ID",
+      "fallback": "Użyj hasła",
+      "cancel": "Anuluj",
+      "enable_title": "Włącz logowanie biometryczne",
+      "enable_description": "Możesz logować się szybciej używając odcisku palca lub Face ID. Twoje dane biometryczne pozostają wyłącznie na tym urządzeniu.",
+      "enable_confirm": "Włącz",
+      "enable_skip": "Teraz nie",
+      "button_label_fingerprint": "Zaloguj odciskiem palca",
+      "button_label_faceid": "Zaloguj Face ID",
+      "not_available": "Biometria niedostępna na tym urządzeniu",
+      "settings_title": "Biometryczne logowanie",
+      "settings_description": "Loguj się szybko używając odcisku palca lub Face ID"
+    },
+    "new_device": {
+      "title": "Nowe urządzenie",
+      "message": "Wykryliśmy logowanie z nowego urządzenia lub lokalizacji.",
+      "verification_sent": "Wysłaliśmy kod weryfikacyjny na {{email}}",
+      "code_label": "Kod weryfikacyjny",
+      "code_placeholder": "123456",
+      "code_expires": "Kod ważny 10 minut",
+      "resend": "Wyślij ponownie",
+      "verify": "Zweryfikuj",
+      "trust_question": "Czy to Twoje prywatne urządzenie?",
+      "trust_yes": "Tak, zaufaj temu urządzeniu",
+      "trust_no": "Nie, sesja tymczasowa",
+      "trust_yes_info": "Zostaniesz zalogowany na 30 dni. Możesz zarządzać urządzeniami w Ustawieniach.",
+      "trust_no_info": "Zostaniesz automatycznie wylogowany po 15 minutach bezczynności."
+    },
+    "auto_logout": {
+      "title": "Sesja wygasła",
+      "message": "Zostałeś wylogowany ze względów bezpieczeństwa (15 minut bezczynności).",
+      "relogin": "Zaloguj się ponownie"
+    },
+    "forgot_password": {
+      "title": "Reset hasła",
+      "description": "Podaj swój adres e-mail. Wyślemy Ci link do resetowania hasła.",
+      "email": "Adres e-mail",
+      "submit": "Wyślij link",
+      "sent": "Sprawdź skrzynkę mailową",
+      "sent_description": "Wysłaliśmy link do {{email}}. Sprawdź też folder spam."
+    }
+  },
+
+  "onboarding": {
+    "step1": {
+      "title": "Cześć!",
+      "subtitle": "ContextCompass pomoże Ci lepiej prowadzić rozmowy",
+      "description": "Dodaj osoby, z którymi rozmawiasz, a AI podpowie Ci co i jak odpowiedzieć — pamiętając pełny kontekst relacji.",
+      "cta": "Zacznijmy"
+    },
+    "step2": {
+      "title": "Opowiedz nam o sobie",
+      "subtitle": "AI będzie lepiej rozumiało Twój styl komunikacji",
+      "name_label": "Jak masz na imię?",
+      "name_placeholder": "Twoje imię lub pseudonim",
+      "age_label": "Wiek",
+      "age_placeholder": "np. 25",
+      "city_label": "Miasto",
+      "city_placeholder": "np. Warszawa",
+      "gender_label": "Płeć",
+      "gender_male": "Mężczyzna",
+      "gender_female": "Kobieta",
+      "gender_other": "Inna / Nie podaję",
+      "skip_note": "Możesz uzupełnić to później w Profilu"
+    },
+    "step3": {
+      "title": "Dodaj pierwszą osobę",
+      "subtitle": "Z kim chcesz prowadzić rozmowę?",
+      "name_label": "Imię lub pseudonim",
+      "name_placeholder": "np. Ania, Klient z firmy X",
+      "template_label": "Typ relacji",
+      "context_label": "Co wiesz o tej osobie?",
+      "context_placeholder": "np. Poznaliśmy się tydzień temu przez wspólnych znajomych, lubi muzykę...",
+      "context_help": "Im więcej napiszesz, tym trafniejsze będą podpowiedzi AI",
+      "cta": "Gotowe — do aplikacji!",
+      "skip": "Pomiń — dodam później"
+    }
+  },
+
+  "dashboard": {
+    "title": "Twoje rozmowy",
+    "empty_title": "Nie masz jeszcze żadnych osób",
+    "empty_description": "Dodaj pierwszą osobę i zacznij korzystać z podpowiedzi AI",
+    "empty_cta": "Dodaj osobę",
+    "add_contact": "Dodaj osobę",
+    "archived": "Zarchiwizowane",
+    "show_archived": "Pokaż zarchiwizowane",
+    "hide_archived": "Ukryj zarchiwizowane",
+    "search_placeholder": "Szukaj osoby...",
+    "last_active": "Ostatnia aktywność: {{date}}"
+  },
+
+  "contact": {
+    "add": {
+      "title": "Dodaj osobę",
+      "subtitle": "Wypełnij podstawowe informacje"
+    },
+    "edit": {
+      "title": "Edytuj osobę",
+      "subtitle": "Zaktualizuj informacje"
+    },
+    "name": {
+      "label": "Imię lub pseudonim",
+      "placeholder": "np. Ania, Szef z pracy",
+      "help": "Może być pseudonim — tylko Ty to widzisz"
+    },
+    "nickname": {
+      "label": "Alternatywna nazwa",
+      "placeholder": "np. Ta rudowłosa z kawiarni",
+      "help": "Opcjonalne — pomocne gdy masz wiele kontaktów"
+    },
+    "template": {
+      "label": "Typ relacji",
+      "help": "Określa styl podpowiedzi AI",
+      "general": "Ogólna rozmowa",
+      "friend": "Znajomy / Koleżanka",
+      "work_basic": "Zawodowa",
+      "work_advanced": "Zawodowa (zaawansowana)",
+      "romantic": "Romantyczna",
+      "romantic_deep": "Romantyczna (głęboka)",
+      "erotic": "Intymna (18+)",
+      "networking": "Networking",
+      "conflict": "Trudna rozmowa / Konflikt",
+      "sales": "Sprzedaż",
+      "coaching": "Coaching",
+      "family": "Rodzina"
+    },
+    "context": {
+      "label": "Co wiesz o tej osobie?",
+      "placeholder": "np. Poznaliśmy się na koncercie, lubi jazz i podróże, pracuje jako grafik...",
+      "help": "AI używa tych informacji do lepszych podpowiedzi. Maksymalnie 2000 znaków."
+    },
+    "tags": {
+      "label": "Tagi",
+      "placeholder": "Dodaj tag i naciśnij Enter",
+      "help": "Opcjonalne etykiety do organizacji"
+    },
+    "saved": "Zapisano zmiany",
+    "deleted": "Usunięto kontakt",
+    "archived": "Kontakt zarchiwizowany",
+    "unarchived": "Kontakt przywrócony",
+    "delete": {
+      "title": "Usuń kontakt",
+      "confirm": "Czy na pewno chcesz usunąć {{name}}? Usunięte zostaną też wszystkie rozmowy i analizy. Tej akcji nie można cofnąć.",
+      "button": "Tak, usuń"
+    },
+    "archive": {
+      "title": "Archiwizuj kontakt",
+      "confirm": "{{name}} zostanie ukryta z głównej listy. Możesz ją przywrócić w dowolnym momencie.",
+      "button": "Archiwizuj"
+    }
+  },
+
+  "chat": {
+    "placeholder": "Wpisz lub wklej fragment rozmowy...",
+    "voice_input": {
+      "tooltip": "Nagraj głosowo",
+      "aria": "Nagrywanie głosowe",
+      "start": "Nagraj",
+      "stop": "Zatrzymaj",
+      "listening": "Słucham...",
+      "not_supported": "Nagrywanie niedostępne w tej przeglądarce. Użyj Chrome lub Edge."
+    },
+    "send": "Wyślij",
+    "get_hint": "Podpowiedź AI",
+    "get_hint_tooltip": "Zapytaj AI co najlepiej odpowiedzieć",
+    "analyze": "Analizuj rozmowę",
+    "analyze_tooltip": "Pełna analiza: co robisz dobrze, co warto zmienić",
+    "role_user": "Ja",
+    "role_other": "{{name}}",
+    "paste_conversation": "Wklej całą rozmowę",
+    "paste_placeholder": "Wklej tutaj skopiowaną rozmowę...",
+    "history_empty": "Brak historii rozmów. Zacznij pisać lub wklej rozmowę.",
+    "ai_note_label": "Uwaga AI"
+  },
+
+  "hint": {
+    "title": "Podpowiedzi AI",
+    "loading": "Generuję podpowiedzi...",
+    "copy_tooltip": "Kopiuj do schowka",
+    "copied": "Skopiowano!",
+    "variant_casual": "Swobodna",
+    "variant_formal": "Formalna",
+    "variant_playful": "Żartobliwa",
+    "why_label": "Dlaczego to działa?",
+    "fallback_warning": "Używam {{model}} (darmowy limit Gemini wyczerpany)",
+    "offline_warning": "AI niedostępne — pokazuję sugestie offline",
+    "limit_reached": "Wyczerpałeś dzienny limit podpowiedzi ({{used}}/{{max}})",
+    "limit_resets": "Limit odnowi się o północy",
+    "upgrade_cta": "Odblokuj nieograniczone podpowiedzi"
+  },
+
+  "analysis": {
+    "title": "Analiza rozmowy",
+    "paste_title": "Wklej rozmowę do analizy",
+    "paste_description": "Wklej pełny tekst rozmowy. Nie przechowujemy jego oryginalnej treści — tylko wnioski AI.",
+    "paste_placeholder": "Wklej tutaj całą rozmowę...",
+    "use_history": "Użyj historii z aplikacji",
+    "analyze_button": "Analizuj",
+    "analyzing": "Analizuję... (może zająć 15–30 sekund)",
+    "strengths_title": "✅ Co robisz dobrze",
+    "weaknesses_title": "⚠️ Co warto poprawić",
+    "insights_title": "🧠 Co wiesz o tej osobie",
+    "recommendations_title": "💡 Rekomendacje",
+    "saved": "Analiza zapisana w historii",
+    "history_title": "Historia analiz",
+    "history_empty": "Brak poprzednich analiz",
+    "limit_reached": "Wykorzystałeś {{used}}/{{max}} analiz w tym tygodniu",
+    "limit_resets": "Nowe analizy dostępne od poniedziałku",
+    "upgrade_cta": "Premium — analizy bez limitu"
+  },
+
+  "profile": {
+    "title": "Twój profil",
+    "edit_title": "Edytuj profil",
+    "name_label": "Imię / Pseudonim",
+    "age_label": "Wiek",
+    "city_label": "Miasto",
+    "height_label": "Wzrost (cm)",
+    "weight_label": "Waga (kg)",
+    "gender_label": "Płeć",
+    "personality_label": "Typ osobowości",
+    "personality_placeholder": "np. INTJ, ekstrawertyk, empatyczna...",
+    "personality_help": "AI uwzględnia to w podpowiedziach",
+    "ai_insights_title": "Cechy odkryte przez AI",
+    "ai_insights_empty": "AI jeszcze nie odkryło żadnych cech. Prowadź więcej rozmów.",
+    "ai_insights_help": "AI analizuje Twój styl komunikacji i odkrywa Twoje cechy",
+    "update_proposals_badge": "Nowe propozycje AI",
+    "update_modal": {
+      "title": "AI proponuje aktualizacje profilu",
+      "description": "Na podstawie ostatnich {{count}} rozmów AI odkryło nowe cechy. Zaakceptuj te, które pasują.",
+      "accept_selected": "Zaakceptuj zaznaczone",
+      "reject_all": "Odrzuć wszystkie",
+      "confidence_high": "Pewność: wysoka",
+      "confidence_medium": "Pewność: średnia",
+      "confidence_low": "Pewność: niska",
+      "reason_label": "Podstawa:"
+    },
+    "18plus": {
+      "section_title": "Treści dla dorosłych",
+      "status_verified": "Zweryfikowany (18+)",
+      "status_not_verified": "Niezweryfikowany",
+      "verify_button": "Zweryfikuj wiek (18+)",
+      "modal_title": "Weryfikacja wieku",
+      "modal_description": "Aby odblokować szablony dla dorosłych, potwierdź, że masz ukończone 18 lat.",
+      "birthdate_label": "Data urodzenia",
+      "declaration_checkbox": "Oświadczam, że mam ukończone 18 lat i akceptuję dostęp do treści dla dorosłych",
+      "confirm_button": "Potwierdź i odblokuj",
+      "too_young": "Nie możemy odblokować dostępu dla osób niepełnoletnich.",
+      "success": "Dostęp do treści dla dorosłych odblokowany"
+    }
+  },
+
+  "settings": {
+    "title": "Ustawienia",
+    "sections": {
+      "ai": "Asystent AI",
+      "account": "Konto",
+      "security": "Bezpieczeństwo",
+      "notifications": "Powiadomienia",
+      "backup": "Kopia zapasowa",
+      "display": "Wygląd",
+      "subscription": "Subskrypcja",
+      "about": "O aplikacji"
+    },
+    "ai": {
+      "title": "Ustawienia AI",
+      "current_model": "Aktualny model: {{model}}",
+      "daily_usage": "Użycie dziś: {{used}}/{{max}} podpowiedzi",
+      "own_key_title": "Własny klucz API",
+      "own_key_description": "Podaj własny klucz, aby nie być ograniczonym dziennymi limitami",
+      "own_key_openai": "Klucz OpenAI",
+      "own_key_openai_placeholder": "sk-...",
+      "own_key_claude": "Klucz Claude (Anthropic)",
+      "own_key_claude_placeholder": "sk-ant-...",
+      "own_key_save": "Zapisz klucze",
+      "own_key_saved": "Klucze zapisane (szyfrowane)",
+      "own_key_help": "Klucze są szyfrowane i przechowywane bezpiecznie. Nigdy nie są widoczne w postaci jawnej.",
+      "fallback_title": "Automatyczny fallback",
+      "fallback_description": "Automatycznie przełączaj na inny model gdy limit zostanie wyczerpany"
+    },
+    "security": {
+      "title": "Bezpieczeństwo",
+      "trusted_devices_title": "Zaufane urządzenia",
+      "trusted_devices_description": "Urządzenia, na których jesteś zalogowany na 30 dni",
+      "trusted_devices_empty": "Brak zaufanych urządzeń",
+      "remove_device": "Usuń",
+      "remove_all_devices": "Wyloguj ze wszystkich urządzeń",
+      "remove_all_confirm": "Zostaniesz wylogowany ze wszystkich urządzeń, w tym z obecnego. Potwierdź?",
+      "biometric_title": "Biometryczne logowanie",
+      "biometric_toggle": "Logowanie odciskiem / Face ID",
+      "two_factor_title": "Weryfikacja dwuetapowa (2FA)",
+      "two_factor_description": "Dodatkowa warstwa ochrony konta",
+      "two_factor_enable": "Włącz 2FA",
+      "auto_logout_title": "Auto-wylogowanie",
+      "auto_logout_description": "Na niezaufanych urządzeniach: wylogowanie po 15 min bezczynności"
+    },
+    "notifications": {
+      "title": "Powiadomienia",
+      "push_title": "Powiadomienia push",
+      "push_description": "Powiadamiaj o nowych analizach i aktualizacjach profilu",
+      "analysis_ready": "Analiza gotowa",
+      "profile_update": "Propozycje aktualizacji profilu",
+      "limit_warning": "Zbliżasz się do limitu",
+      "premium_expiry": "Subskrypcja wygasa wkrótce"
+    },
+    "backup": {
+      "title": "Kopia zapasowa",
+      "export_title": "Eksport danych",
+      "export_description": "Pobierz wszystkie swoje dane jako plik ZIP (JSON)",
+      "export_button": "Pobierz ZIP",
+      "exporting": "Przygotowuję plik...",
+      "export_ready": "Plik gotowy do pobrania",
+      "google_drive_title": "Google Drive",
+      "google_drive_description": "Automatyczna kopia co 24 godziny (Premium)",
+      "google_drive_connect": "Połącz z Google Drive",
+      "google_drive_connected": "Połączono: {{email}}",
+      "auto_backup_toggle": "Automatyczny backup",
+      "last_backup": "Ostatnia kopia: {{date}}"
+    },
+    "display": {
+      "title": "Wygląd",
+      "theme_title": "Motyw",
+      "theme_light": "Jasny",
+      "theme_dark": "Ciemny",
+      "theme_system": "Systemowy",
+      "language_title": "Język",
+      "language_pl": "Polski",
+      "language_en": "English"
+    },
+    "subscription": {
+      "title": "Subskrypcja",
+      "current_plan": "Aktualny plan",
+      "free_plan": "Darmowy",
+      "premium_plan": "Premium",
+      "premium_expires": "Aktywny do: {{date}}",
+      "upgrade_title": "Przejdź na Premium",
+      "upgrade_price": "1,99 zł / miesiąc",
+      "upgrade_button": "Kup Premium",
+      "manage_button": "Zarządzaj subskrypcją",
+      "cancel_button": "Anuluj subskrypcję",
+      "cancel_confirm": "Czy na pewno chcesz anulować? Dostęp Premium pozostanie aktywny do końca opłaconego okresu.",
+      "features_title": "Co zyskujesz z Premium:",
+      "features": {
+        "unlimited_hints": "Nieograniczone podpowiedzi AI",
+        "unlimited_analysis": "Nieograniczone analizy rozmów",
+        "all_templates": "Wszystkie szablony (12+)",
+        "better_ai": "Lepsza jakość AI (GPT-4o-mini)",
+        "auto_backup": "Automatyczny backup do Drive",
+        "priority_support": "Priorytetowe wsparcie"
+      }
+    },
+    "account": {
+      "title": "Konto",
+      "delete_account": "Usuń konto",
+      "delete_confirm_title": "Usuń konto",
+      "delete_confirm_description": "Wszystkie Twoje dane zostaną trwale usunięte, w tym kontakty, rozmowy i analizy. Tej operacji nie można cofnąć.",
+      "delete_confirm_button": "Rozumiem — usuń moje konto",
+      "delete_type_confirm": "Wpisz \"USUŃ\" aby potwierdzić",
+      "logout": "Wyloguj się",
+      "logout_confirm": "Czy na pewno chcesz się wylogować?"
+    }
+  },
+
+  "premium": {
+    "badge": "Premium",
+    "locked_feature": "Ta funkcja dostępna w Premium",
+    "upgrade_cta": "Zobacz plany",
+    "limit_reached_title": "Wyczerpałeś dzienny limit",
+    "limit_reached_description": "Wykorzystałeś {{used}}/{{max}} {{type}} na dziś. Limit odnowi się o północy.",
+    "limit_hint": "podpowiedzi",
+    "limit_analysis": "analiz",
+    "limit_action_upgrade": "Kup Premium — bez limitów",
+    "limit_action_own_key": "Dodaj własny klucz API",
+    "limit_action_wait": "Poczekaj do północy",
+    "activated": "Premium aktywowane! 🎉",
+    "activated_description": "Masz teraz nieograniczony dostęp do wszystkich funkcji."
+  },
+
+  "errors": {
+    "ai_unavailable": "AI chwilowo niedostępne. Spróbuj ponownie za chwilę.",
+    "ai_fallback": "Przełączono na {{model}} ({{reason}})",
+    "ai_limit_gemini": "dzienny limit Gemini wyczerpany",
+    "ai_limit_groq": "limit Groq wyczerpany",
+    "ai_offline": "brak połączenia z internetem",
+    "sync_failed": "Synchronizacja nieudana. Dane zostaną zsynchronizowane po przywróceniu połączenia.",
+    "screenshot_detected": "Wykryto próbę zrzutu ekranu. Treści rozmów są poufne.",
+    "session_expired": "Sesja wygasła. Zaloguj się ponownie.",
+    "permission_denied": "Brak uprawnień do tej funkcji.",
+    "not_found": "Nie znaleziono danych.",
+    "validation_name_required": "Nazwa jest wymagana",
+    "validation_name_too_long": "Nazwa może mieć maksymalnie 100 znaków",
+    "validation_context_too_long": "Kontekst może mieć maksymalnie 2000 znaków",
+    "validation_age_invalid": "Podaj prawidłowy wiek",
+    "validation_age_too_young": "Musisz mieć co najmniej 13 lat, aby korzystać z aplikacji",
+    "voice_not_supported": "Nagrywanie głosowe niedostępne. Użyj Chrome lub Edge.",
+    "biometric_failed": "Weryfikacja biometryczna nieudana. Zaloguj się hasłem.",
+    "backup_failed": "Tworzenie kopii zapasowej nieudane. Spróbuj ponownie."
+  },
+
+  "help": {
+    "hint_what_is": "Podpowiedź AI analizuje kontekst Twojej relacji z tą osobą i sugeruje co napisać.",
+    "context_what_is": "Kontekst to informacje o osobie, które AI uwzględni w podpowiedziach. Im więcej napiszesz, tym lepiej.",
+    "template_what_is": "Typ relacji określa styl komunikacji — AI inaczej podpowiada w relacji romantycznej, a inaczej zawodowej.",
+    "18plus_what_is": "Tryb 18+ odblokowuje szablony intymne i romantyczne bez filtrów treści dla dorosłych.",
+    "sync_what_is": "Twoje dane synchronizują się między urządzeniami automatycznie. W trybie offline pracujesz na lokalnej kopii.",
+    "ai_insights_what_is": "AI odkrywa Twoje cechy komunikacyjne na podstawie rozmów i używa ich do lepszych podpowiedzi.",
+    "trusted_device_what_is": "Zaufane urządzenie to Twój prywatny telefon/komputer. Na nich jesteś zalogowany przez 30 dni bez przerwy."
+  },
+
+  "tooltips": {
+    "archive_contact": "Ukryj kontakt z głównej listy (można przywrócić)",
+    "delete_contact": "Trwale usuń kontakt i historię",
+    "ai_insights": "Cechy odkryte przez AI na podstawie Twoich rozmów",
+    "premium_badge": "Funkcja dostępna w planie Premium",
+    "voice_input": "Nagraj głosem zamiast pisać",
+    "hint_panel": "Otwórz panel z podpowiedziami AI",
+    "analyze_button": "Przeanalizuj całą rozmowę z tą osobą",
+    "sync_status": "Status synchronizacji danych",
+    "daily_limit": "Wykorzystane podpowiedzi z dziennego limitu",
+    "biometric_login": "Szybsze logowanie bez hasła",
+    "trusted_device": "To urządzenie jest zapamiętane na 30 dni"
+  }
+}
