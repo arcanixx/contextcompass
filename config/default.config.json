@@ -1,0 +1,172 @@
+{
+  "_comment": "ContextCompass — globalna konfiguracja domyślna. NIE commituj wartości produkcyjnych. Użyj .env dla sekretów.",
+  "appName": "ContextCompass",
+  "appVersion": "0.1.0",
+  "defaultLanguage": "pl",
+  "supportedLanguages": ["pl", "en"],
+
+  "api": {
+    "supabaseUrl": "REPLACE_WITH_ENV_VITE_SUPABASE_URL",
+    "supabaseAnonKey": "REPLACE_WITH_ENV_VITE_SUPABASE_ANON_KEY",
+    "ai": {
+      "fallbackChain": ["gemini", "groq", "template"],
+      "providers": {
+        "gemini": {
+          "model": "gemini-1.5-flash",
+          "endpointPath": "/functions/v1/ai-proxy",
+          "freeDailyLimit": 1500,
+          "freeRpmLimit": 60,
+          "timeoutMs": 15000
+        },
+        "groq": {
+          "model": "llama-3.1-70b-versatile",
+          "endpointPath": "/functions/v1/ai-proxy",
+          "freeRpmLimit": 30,
+          "freeDailyLimit": 1000,
+          "timeoutMs": 10000
+        },
+        "openai": {
+          "model": "gpt-4o-mini",
+          "endpointPath": "/functions/v1/ai-proxy",
+          "timeoutMs": 20000
+        },
+        "template": {
+          "type": "offline",
+          "hintsCount": 2
+        }
+      },
+      "contextWindow": {
+        "maxMessages": 20,
+        "maxTokensEstimate": 4000,
+        "summaryUpdateAfterMessages": 10
+      },
+      "profileUpdateBatchSize": 7,
+      "hintVariantsCount": 3
+    }
+  },
+
+  "sync": {
+    "storage": "indexeddb",
+    "syncIntervalSeconds": 30,
+    "retryAttempts": 3,
+    "retryDelayMs": 5000,
+    "conflictResolution": "lastWriteWins",
+    "encryptLocalData": true
+  },
+
+  "security": {
+    "autoLogoutMinutes": 15,
+    "trustedDeviceRefreshDays": 30,
+    "untrustedSessionMinutes": 15,
+    "maxTrustedDevices": 5,
+    "newDeviceVerificationRequired": true,
+    "totpRequired2fa": false,
+    "minAgeForAdultContent": 18,
+    "screenshotWarningEnabled": true,
+    "biometricEnabled": true
+  },
+
+  "limits": {
+    "free": {
+      "aiHintsPerDay": 30,
+      "fullAnalysisPerWeek": 3,
+      "maxContacts": 10,
+      "historyRetentionDays": 7,
+      "availableTemplates": ["general", "friend", "work_basic"]
+    },
+    "premium": {
+      "aiHintsPerDay": -1,
+      "fullAnalysisPerWeek": -1,
+      "maxContacts": -1,
+      "historyRetentionDays": -1,
+      "availableTemplates": ["all"]
+    }
+  },
+
+  "templates": {
+    "available": [
+      { "id": "general",        "requiresPremium": false, "requires18plus": false },
+      { "id": "friend",         "requiresPremium": false, "requires18plus": false },
+      { "id": "work_basic",     "requiresPremium": false, "requires18plus": false },
+      { "id": "work_advanced",  "requiresPremium": true,  "requires18plus": false },
+      { "id": "romantic",       "requiresPremium": true,  "requires18plus": false },
+      { "id": "romantic_deep",  "requiresPremium": true,  "requires18plus": true  },
+      { "id": "erotic",         "requiresPremium": true,  "requires18plus": true  },
+      { "id": "networking",     "requiresPremium": true,  "requires18plus": false },
+      { "id": "conflict",       "requiresPremium": true,  "requires18plus": false },
+      { "id": "sales",          "requiresPremium": true,  "requires18plus": false },
+      { "id": "coaching",       "requiresPremium": true,  "requires18plus": false },
+      { "id": "family",         "requiresPremium": true,  "requires18plus": false }
+    ]
+  },
+
+  "ui": {
+    "defaultTheme": "system",
+    "availableThemes": ["light", "dark", "system"],
+    "toastDurationMs": {
+      "success": 3000,
+      "info": 3000,
+      "warning": 5000,
+      "error": 8000
+    },
+    "maxToastsVisible": 3,
+    "tooltipDelayMs": 500,
+    "longPressMs": 600,
+    "inputClearButtonVisible": true,
+    "skeletonLoadingMinMs": 200
+  },
+
+  "voice": {
+    "enabled": true,
+    "silenceTimeoutMs": 3000,
+    "maxDurationSeconds": 120,
+    "language": "pl-PL"
+  },
+
+  "backup": {
+    "autoBackupEnabled": false,
+    "autoBackupIntervalHours": 24,
+    "providers": ["google_drive", "zip_export"],
+    "retentionCount": 7
+  },
+
+  "plugin": {
+    "defaultEnabledDomains": [
+      "*://*.web.whatsapp.com/*",
+      "*://*.messenger.com/*",
+      "*://teams.microsoft.com/*",
+      "*://discord.com/*",
+      "*://*.telegram.org/*",
+      "*://slack.com/*",
+      "*://app.slack.com/*"
+    ],
+    "overlayPosition": "bottom-right",
+    "contextMenuLabel": "ContextCompass — podpowiedź"
+  },
+
+  "errors": {
+    "webhookEnabled": true,
+    "webhookUrl": "REPLACE_WITH_ENV_ERROR_WEBHOOK_URL",
+    "batchAlertsThreshold": 20,
+    "batchAlertsWindowMinutes": 5
+  },
+
+  "onboarding": {
+    "steps": 3,
+    "skipAllowed": true,
+    "helpTooltipsEnabled": true
+  },
+
+  "debug": {
+    "mockAiInDev": true,
+    "mockSupabaseInDev": false,
+    "logLevel": "info",
+    "showDevPanel": true,
+    "simulationFlags": [
+      "__simulate_offline",
+      "__simulate_ai_429",
+      "__simulate_sync_error",
+      "__simulate_premium"
+    ]
+  }
+}
